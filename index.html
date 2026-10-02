@@ -91,6 +91,57 @@
         footer a {
             color: #2c3e91;
         }
+        #guestbook-list-container {
+            margin-top: 24px;
+            padding-top: 16px;
+            border-top: 1px dashed #ddd;
+        }
+         #guestbook-list-container h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+            color: #2c3e91;
+        }
+        .guestbook-item {
+            background-color: #f0f2f5;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            position: relative; /* 자식 요소인 삭제 버튼(.delete-btn)의 절대 배치를 위한 기준점 설정 */
+            padding-right: 40px; /* 우측에 배치될 삭제 버튼 영역과 본문 텍스트가 겹치지 않도록 패딩 부여 */
+        }
+        .guestbook-item .guestbook-name {
+            font-weight: bold;
+            color: #2c3e91;
+            margin-bottom: 4px;
+            font-size: 14px;
+        }
+        .guestbook-item .guestbook-message {
+            font-size: 14px;
+            white-space: pre-wrap;
+            color: #333;
+        }
+        .guestbook-item .delete-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: #999;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 2px 6px;
+            border-radius: 4px;
+            line-height: 1;
+            transition: color 0.2s, background-color 0.2s;
+        }
+
+        /* 삭제 버튼 호버 시 시각적 피드백 제공 */
+        .guestbook-item .delete-btn:hover {
+            background-color: #ffebee;
+            color: #d32f2f;
+        }
     </style>
 </head>
 <body>
