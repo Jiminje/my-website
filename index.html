@@ -13,6 +13,7 @@
       --text-color: #2D3748;    /* 진한 회색 텍스트 */
       --bg-color: #F8FAFC;      /* 연한 배경 */
       --white: #FFFFFF;
+      --danger-color: #EF4444;  /* 삭제 버튼용 붉은색 */
     }
 
     * {
@@ -85,13 +86,13 @@
 
     .slides {
       display: flex;
-      width: 300%;
+      width: 400%;
       height: 100%;
       transition: transform 0.6s ease-in-out;
     }
 
     .slide {
-      width: 33.333%;
+      width: 25%;
       height: 100%;
       display: flex;
       justify-content: center;
@@ -99,14 +100,16 @@
       color: var(--white);
       font-size: 1.5rem;
       font-weight: 600;
-      background-size: cover;
-      background-position: center;
+      position: relative;
+      background-color: var(--primary-color);
     }
 
-    /* 임시 이미지 배경 (추후 <img> 태그나 background-image 경로 수정 가능) */
-    .slide:nth-child(1) { background-color: var(--primary-color); }
-    .slide:nth-child(2) { background-color: var(--primary-dark); }
-    .slide:nth-child(3) { background-color: #BEE3F8; color: var(--text-color); }
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
 
     /* Main Layout */
     main {
@@ -131,12 +134,18 @@
       padding-bottom: 0.5rem;
     }
 
-    /* Portfolio Section Grid */
-    .portfolio-grid {
+    /* Skill Section Grid */
+    .skill-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 1.5rem;
       margin-top: 1rem;
+    }
+
+    @media (max-width: 600px) {
+      .skill-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     .card {
@@ -145,6 +154,10 @@
       border-radius: 8px;
       border: 1px solid #D0E8FF;
       transition: transform 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.8rem;
     }
 
     .card:hover {
@@ -152,8 +165,24 @@
     }
 
     .card h3 {
-      margin-bottom: 0.5rem;
       color: var(--primary-dark);
+    }
+
+    /* Skill 이미지 상자 스타일 (너무 크지 않게 120px 고정 + 공백 없이 채움) */
+    .card-img-wrapper {
+      width: 120px;
+      height: 120px;
+      border-radius: 8px;
+      overflow: hidden;
+      background-color: #FFFFFF;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .card-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* 공백 없이 꽉 채우기 */
+      display: block;
     }
 
     /* 4. Guestbook Section */
@@ -205,15 +234,39 @@
       background-color: #F1F5F9;
       border-left: 4px solid var(--primary-color);
       border-radius: 4px;
+      position: relative;
     }
 
     .guestbook-item-header {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       font-weight: 600;
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.5rem;
       font-size: 0.9rem;
       color: #64748B;
+    }
+
+    .guestbook-header-right {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .delete-btn {
+      background: none;
+      border: none;
+      color: var(--danger-color);
+      font-size: 0.8rem;
+      cursor: pointer;
+      font-weight: 600;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+
+    .delete-btn:hover {
+      opacity: 1;
+      text-decoration: underline;
     }
 
     /* Footer */
@@ -227,26 +280,26 @@
 </head>
 <body>
 
-  <!-- 1. Header Navbar -->
+  <!-- Header Navbar -->
   <header>
     <nav>
       <div class="logo">My Portfolio</div>
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
-        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#skill">Skill</a></li>
         <li><a href="#contact">Contact</a></li>
         <li><a href="#guestbook">Guestbook</a></li>
       </ul>
     </nav>
   </header>
 
-  <!-- 2. Photo Slider (3-second autoplay) -->
+  <!-- Photo Slider -->
   <div class="slider-container">
     <div class="slides" id="slides">
-      <!-- 추후 <img> 태그로 교체하시려면 innerHTML 또는 background-image 속성을 수정하시면 됩니다. -->
-      <div class="slide">사진 1 (추후 이미지 삽입)</div>
-      <div class="slide">사진 2 (추후 이미지 삽입)</div>
-      <div class="slide">사진 3 (추후 이미지 삽입)</div>
+      <div class="slide"><img src="Tang.png" alt="슬라이드 1"></div>
+      <div class="slide"><img src="Jang.png" alt="슬라이드 2"></div>
+      <div class="slide"><img src="yeon.png" alt="슬라이드 3"></div>
+      <div class="slide"><img src="Mau.png" alt="슬라이드 4"></div>
     </div>
   </div>
 
@@ -254,24 +307,24 @@
     <!-- About Section -->
     <section id="about">
       <h2>About Me</h2>
-      <p>안녕하세요! 사용자 경험을 가치있게 만드는 개발자/디자이너입니다. 깔끔하고 직관적인 디자인과 안정적인 코드를 작성하는 것을 좋아합니다.</p>
+      <p>안녕하십니까 오버워치를 좋아하는 개발자를 꿈꾸고있는 지민제입니다. <br>대전보건대학교 컴퓨터정보학과 4학년 재학중이며, 부족하지만 많이 배우며 성장하고싶습니다.</p>
     </section>
 
-    <!-- Portfolio Section -->
-    <section id="portfolio">
-      <h2>Portfolio</h2>
-      <div class="portfolio-grid">
+    <!-- Skill Section (이미지 래퍼 적용) -->
+    <section id="skill">
+      <h2>Skill</h2>
+      <div class="skill-grid">
         <div class="card">
-          <h3>프로젝트 1</h3>
-          <p>프로젝트에 대한 간단한 설명이 들어갑니다.</p>
+          <h3>Python</h3>
+          <div class="card-img-wrapper">
+            <img src="Python.PNG" alt="Python">
+          </div>
         </div>
         <div class="card">
-          <h3>프로젝트 2</h3>
-          <p>프로젝트에 대한 간단한 설명이 들어갑니다.</p>
-        </div>
-        <div class="card">
-          <h3>프로젝트 3</h3>
-          <p>프로젝트에 대한 간단한 설명이 들어갑니다.</p>
+          <h3>SQL</h3>
+          <div class="card-img-wrapper">
+            <img src="SQL.PNG" alt="SQL">
+          </div>
         </div>
       </div>
     </section>
@@ -279,11 +332,11 @@
     <!-- Contact Section -->
     <section id="contact">
       <h2>Contact</h2>
-      <p>📧 Email: example@email.com</p>
-      <p>🔗 Github: github.com/your-id</p>
+      <p>📧 Email: alswp1342@gmail.com</p>
+      <p>🔗 Github: <a href="https://github.com/Jiminje" target="_blank">Jiminje</a></p>
     </section>
 
-    <!-- 4. Guestbook Section -->
+    <!-- Guestbook Section -->
     <section id="guestbook">
       <h2>Guestbook</h2>
       <form class="guestbook-form" id="guestbookForm">
@@ -303,7 +356,7 @@
 
   <script>
     // ----------------------------------------------------
-    // 2. 3초마다 자동 슬라이드 동작
+    // 3초마다 자동 슬라이드 동작
     // ----------------------------------------------------
     const slides = document.getElementById('slides');
     const totalSlides = document.querySelectorAll('.slide').length;
@@ -311,14 +364,14 @@
 
     function moveToNextSlide() {
       currentIndex = (currentIndex + 1) % totalSlides;
-      slides.style.transform = `translateX(-${currentIndex * 33.333}%)`;
+      const step = 100 / totalSlides;
+      slides.style.transform = `translateX(-${currentIndex * step}%)`;
     }
 
-    // 3000ms = 3초
     setInterval(moveToNextSlide, 3000);
 
     // ----------------------------------------------------
-    // 4. 자바스크립트 방명록 기능
+    // 방명록 작성 및 삭제 기능
     // ----------------------------------------------------
     const form = document.getElementById('guestbookForm');
     const authorInput = document.getElementById('authorInput');
@@ -351,16 +404,24 @@
       item.innerHTML = `
         <div class="guestbook-item-header">
           <span>${escapeHtml(author)}</span>
-          <span>${dateStr}</span>
+          <div class="guestbook-header-right">
+            <span>${dateStr}</span>
+            <button class="delete-btn" onclick="deleteGuestbookEntry(this)">삭제</button>
+          </div>
         </div>
         <div>${escapeHtml(message)}</div>
       `;
 
-      // 최신 글이 맨 위에 오도록 추가
       guestbookList.prepend(item);
     }
 
-    // XSS 방지를 위한 텍스트 이스케이프 함수
+    function deleteGuestbookEntry(button) {
+      if (confirm('이 방명록 글을 삭제하시겠습니까?')) {
+        const item = button.closest('.guestbook-item');
+        item.remove();
+      }
+    }
+
     function escapeHtml(str) {
       return str
         .replace(/&/g, "&amp;")
